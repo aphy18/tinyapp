@@ -20,14 +20,14 @@ const urlDatabase = {
     "9sm5xK": "http://www.google.com"
   };
 
-app.get("/urls.json",(req,res) => {
+    app.get("/urls.json",(req,res) => {
     res.send('Hello')
-app.get("/hello", (req, res) => {
+    app.get("/hello", (req, res) => {
         res.send("<html><body>Hello <b>World</b></body></html>\n");
       });
 })
 
-app.get("/set", (req, res) => {
+  app.get("/set", (req, res) => {
     const a = 1;
     res.send(`a = ${a}`);
    });
@@ -62,6 +62,11 @@ app.get("/set", (req, res) => {
     res.redirect(longURL);
   });
 
+  app.post("/urls/:shortURL/delete", (req,res) => {
+    const idToBeDeleted = req.params.shortURL;
+    delete urlDatabase[idToBeDeleted];
+    res.redirect('/urls')
+  })
 
   app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}!`);
