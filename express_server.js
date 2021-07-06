@@ -18,10 +18,6 @@ app.get("/hello", (req, res) => {
       });
 })
 
-app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}!`);
-})
-
 app.get("/set", (req, res) => {
     const a = 1;
     res.send(`a = ${a}`);
@@ -30,6 +26,20 @@ app.get("/set", (req, res) => {
    app.get("/fetch", (req, res) => {
     res.send(`a = ${a}`);
    });
+
+   app.get("/urls",(req,res) => {
+    const templateVars = { urls: urlDatabase }; // the object
+    res.render("urls_index", templateVars);
+   })
+
+   app.get("/urls/:shortURL", (req, res) => {
+    const templateVars = { shortURL: req.params.shortURL, longURL: req.params.longURL};
+    res.render("urls_show", templateVars);
+  });
+
+   app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}!`);
+})
 
    //can you make a local host up? 
    // what is that in the terminal
