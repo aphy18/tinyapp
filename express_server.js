@@ -9,13 +9,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 function generateRandomString() {
-
+ 
 }
 
 //all app.gets are called "route definitions"
 
+//short url is an id for long urls, random string of characters
 const urlDatabase = {
-    "b2xVn2": "http://www.lighthouselabs.ca",
+    "b2xVn2": "http://www.lighthouselabs.ca", 
     "9sm5xK": "http://www.google.com"
   };
 
@@ -48,6 +49,17 @@ app.get("/set", (req, res) => {
    app.get("/urls/:shortURL", (req, res) => {
     const templateVars = { shortURL: req.params.shortURL, longURL: req.params.longURL};
     res.render("urls_show", templateVars);
+  });
+
+  app.post("/urls", (req, res) => {
+    console.log(req.body);  // Log the POST request body to the console
+    res.send("Ok");         // Respond with 'Ok' (we will replace this)
+  });
+
+  app.get("/u/:shortURL", (req, res) => {
+    const shortURL = req.params.shortURL
+    const longURL = urlDatabase[shortURL]; //dot notation reads exact strings of "shortURL"
+    res.redirect(longURL);
   });
 
 
