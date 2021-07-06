@@ -4,6 +4,8 @@ const express = require('express')
 const app = express();
 const PORT = 8080; //you can use any port outside of vagrant, ports lead to different question
 
+app.set("view engine", "ejs");
+
 const urlDatabase = {
     "b2xVn2": "http://www.lighthouselabs.ca",
     "9sm5xK": "http://www.google.com"
