@@ -17,6 +17,7 @@
             <div class="navbar-nav">
               <a class="nav-item nav-link" href="/urls">My URLs</a>
               <a class="nav-item nav-link" href="/urls/new">Create New URL</a>
+              
             </div>
           </div>
         </nav>
@@ -26,6 +27,7 @@
       <div class="card-body">
         <h5 class="card-title">TinyURL for: <%= longURL %></h5>
         <p class="card-text">Short URL: <a href="/u/<%= shortURL %>"><%= shortURL %></a></p>
+        <form method="POST" action="/urls/9sm5xK"><input type="text" name="longURL"/><button type="submit" class="btn btn-info">Submit</button></form>
       </div>
     <div class="card-footer text-muted"></div>
   </div>

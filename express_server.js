@@ -49,15 +49,25 @@ const urlDatabase = {
    app.get("/urls/:shortURL", (req, res) => {
     const templateVars = { shortURL: req.params.shortURL, longURL: req.params.longURL};
     res.render("urls_show", templateVars);
+    
   });
 
-  app.post("/urls", (req, res) => {
-    console.log(req.body);  // Log the POST request body to the console
+   app.post("/urls/:shortURL", (req, res) => {
+     const shortURL = req.params.shortURL;
+     const longURL = req.body.longURL;
+     urlDatabase[shortURL] = longURL;
+     res.redirect('/urls'); // when you submit the form, redirect ridrects the specified information to the browser
+     
+   })
+
+  
+   app.post("/urls", (req, res) => {
+    console.log(req.body);  // Log the POST request body (object) to the console, //when you submit a form, you're creating a new POST request provided that the forms method is post
     res.send("Ok");         // Respond with 'Ok' (we will replace this)
   });
 
   app.get("/u/:shortURL", (req, res) => {
-    const shortURL = req.params.shortURL
+    const shortURL = req.params.shortURL;
     const longURL = urlDatabase[shortURL]; //dot notation reads exact strings of "shortURL"
     res.redirect(longURL);
   });
@@ -67,6 +77,7 @@ const urlDatabase = {
     delete urlDatabase[idToBeDeleted];
     res.redirect('/urls')
   })
+
 
   app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}!`);
