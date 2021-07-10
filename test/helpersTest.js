@@ -5,22 +5,27 @@ const { isEmailBeingUsed } = require('../helpers.js');
 
 const testUsers = {
   "userRandomID": {
-    id: "userRandomID", 
-    email: "user@example.com", 
+    id: "userRandomID",
+    email: "user@example.com",
     password: "purple-monkey-dinosaur"
   },
   "user2RandomID": {
-    id: "user2RandomID", 
-    email: "user2@example.com", 
+    id: "user2RandomID",
+    email: "user2@example.com",
     password: "dishwasher-funk"
   }
 };
 
 describe('getUserByEmail', function() {
-  it('should return a user with valid email', function() {
-    const result = isEmailBeingUsed("hhh@example.com", testUsers)
+  it('should return a user with valid email', () => {
+    const result = isEmailBeingUsed("user@example.com", testUsers);
     const expectedOutput = true;
     assertEqual(result,expectedOutput);
+  });
+  it('should return undefined with a non-valid email', () => {
+    const result = isEmailBeingUsed("blah@example.com", testUsers);
+    const expectedOutput = false;
+    assertEqual(result, expectedOutput);
   });
 });
 
@@ -31,6 +36,6 @@ describe('getUserByEmail', function() {
 //       head([1,2,3])
 //      });
 //     it("returns '5' for ['5']", () => {
-//       assert.strictEqual(head(['5']), '5'); 
+//       assert.strictEqual(head(['5']), '5');
 //     });
-//   }); 
+//   });
